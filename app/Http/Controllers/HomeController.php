@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,8 +34,13 @@ class HomeController extends Controller
 //        session()->forget('ruchita');
 //        return session()->all();
 
-        $request->session()->flash('message', 'testing purpose');
-        return $request->session()->get('message');
+//        $request->session()->flash('message', 'testing purpose');
+//        return $request->session()->get('message');
+
+        $categories = Category::all();
+        $posts = Post::paginate(1);
+
+        return view('home',compact('categories','posts'));
 
 
 //        session(['ruchita'=>'student']);

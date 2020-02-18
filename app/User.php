@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Post;
+use App\Role;
 
 class User extends Authenticatable
 {
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','role_id','photo_id','is_active'
     ];
 
     /**
@@ -33,9 +35,21 @@ class User extends Authenticatable
     }
 
     public function isAdmin(){
-        if($this->role->name == 'administrator'){
+        if($this->role->name == 'admin'){
             return true;
         }
         return false;
+    }
+
+    public function photo(){
+        return $this->belongsTo('App\Photo');
+    }
+
+    public function post(){
+        return $this->hasMany('App\Post');
+    }
+
+    public function projects() {
+        return $this->belongsToMany('App\Project');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -62,5 +63,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => Middleware\RoleMiddleware::class,
         'IsAdmin' => Middleware\IsAdmin::class,
+        'Admin' => Middleware\Admin::class,
     ];
 }
